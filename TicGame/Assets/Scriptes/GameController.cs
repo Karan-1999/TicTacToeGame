@@ -51,9 +51,60 @@ public class GameController : MonoBehaviour
 
     private bool CheckGameOver()
     {
+        //Game draw condition
         if (count == (interactionButtons.Length - 1))
         {
-            print("Game over");
+            print("Game Draw");
+            buttonText = "Draw";
+            return true;
+        }
+
+        //Row_1 win condition
+        if(interactionButtons[0].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[1].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[2].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Row_1");
+            return true;
+        }
+        //Row_2 win condition
+        if (interactionButtons[3].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[4].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[5].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Row_2");
+            return true;
+        }
+        //Row_3 win condition
+        if (interactionButtons[6].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[7].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[8].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Row_3");
+            return true;
+        }
+        //Column_1 win condition
+        if (interactionButtons[0].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[3].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[6].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Column_1");
+            return true;
+        }
+        //Column_2 win condition
+        if (interactionButtons[1].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[4].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[7].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Column_2");
+            return true;
+        }
+        //Column_3 win condition
+        if (interactionButtons[2].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[5].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[8].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("Column_3");
+            return true;
+        }
+        //diagonal_1 win condition
+        if (interactionButtons[0].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[4].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[8].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("diagonal_1");
+            return true;
+        }
+        //diagonal_2 win condition
+        if (interactionButtons[2].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[4].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[6].transform.GetChild(0).GetComponent<Text>().text == buttonText)
+        {
+            print("diagonal_2");
             return true;
         }
 
@@ -88,9 +139,10 @@ public class GameController : MonoBehaviour
 
     public void ChangeTurn()
     {
+        //Check if game is over
         if (CheckGameOver())
         {
-
+            print("Game over");
         }
         else
         {
