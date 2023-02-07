@@ -22,6 +22,6 @@ public class ButtonController : MonoBehaviour
     {
         gameObject.GetComponent<Button>().interactable = false;
         gameObject.transform.GetChild(0).GetComponent<Text>().text = gamePlay.GetButtonText();
-        gamePlay.ChangeTurn();
+        gamePlay.ChangeTurn(gameObject);
     }
 }

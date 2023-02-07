@@ -12,11 +12,13 @@ public class GameController : MonoBehaviour
     public GameObject circleButton = null;
     public GameObject resultUI = null;
     public Button playAgain = null;
+    public Button undo = null;
 
     //private
     private bool isCross = false;
     private string buttonText = "O";
     private int count = 0;
+    private GameObject lastButtonRef = null;
    
     void Start()
     {
@@ -39,6 +41,7 @@ public class GameController : MonoBehaviour
         resultUI.SetActive(false);
 
         playAgain.interactable = false;
+        undo.interactable = false;
       
         circleButton.GetComponent<Button>().interactable = true;
         crossButton.GetComponent<Button>().interactable = true;
@@ -66,6 +69,7 @@ public class GameController : MonoBehaviour
         }
 
         playAgain.interactable = true;
+        undo.interactable = false;
 
         crossButton.transform.Find("HL").gameObject.SetActive(false);
         circleButton.transform.Find("HL").gameObject.SetActive(false);
@@ -165,8 +169,11 @@ public class GameController : MonoBehaviour
         StartGame();
     }
 
-    public void ChangeTurn()
+    public void ChangeTurn(GameObject _button)
     {
+        undo.interactable = true;
+        lastButtonRef = _button;
+
         //Check if game is over
         if (CheckGameOver())
         {
@@ -184,6 +191,24 @@ public class GameController : MonoBehaviour
 
             SetTurnIndicator();
         }
+    }
+
+    public void UndoClicked()
+    {
+        if (lastButtonRef == null) { return; }
+
+        undo.interactable = false;
+        count--;
+        lastButtonRef.GetComponent<ButtonController>().Initialize();
+        lastButtonRef.GetComponent<Button>().interactable = true;
+
+        isCross = !isCross;
+        if (isCross)
+            buttonText = "X";
+        else
+            buttonText = "O";
+
+        SetTurnIndicator();
     }
 
     public string GetButtonText()
