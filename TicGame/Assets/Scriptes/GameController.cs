@@ -7,8 +7,11 @@ public class GameController : MonoBehaviour
 {
     //public
     public GameObject[] interactionButtons = new GameObject[9];
+    [Header("UI elements")]
     public GameObject crossButton = null;
     public GameObject circleButton = null;
+    public GameObject resultUI = null;
+    public Button playAgain = null;
 
     //private
     private bool isCross = false;
@@ -18,6 +21,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         SetupGame();
+        playAgain.onClick.AddListener(SetupGame);
     }
 
     #region PrivateMethods
@@ -31,6 +35,13 @@ public class GameController : MonoBehaviour
         {
             button.GetComponent<ButtonController>().Initialize();
         }
+
+        resultUI.SetActive(false);
+
+        playAgain.interactable = false;
+      
+        circleButton.GetComponent<Button>().interactable = true;
+        crossButton.GetComponent<Button>().interactable = true;
     }
 
     private void SetTurnIndicator()
@@ -43,10 +54,27 @@ public class GameController : MonoBehaviour
     {
         foreach (GameObject button in interactionButtons)
         {
-            if (button.GetComponent<ButtonController>().IsClickable()){
-                button.GetComponent<Button>().interactable = true;
-            }
+            button.GetComponent<Button>().interactable = true; 
         }
+    }
+
+    private void GameOver()
+    {
+        foreach (GameObject button in interactionButtons)
+        {
+            button.GetComponent<Button>().interactable = false;
+        }
+
+        playAgain.interactable = true;
+
+        crossButton.transform.Find("HL").gameObject.SetActive(false);
+        circleButton.transform.Find("HL").gameObject.SetActive(false);
+
+        resultUI.SetActive(true);
+        if (buttonText == "Draw")
+            resultUI.transform.Find("Image").Find("Text").GetComponent<Text>().text = buttonText;
+        else
+            resultUI.transform.Find("Image").Find("Text").GetComponent<Text>().text = buttonText + " Wins";
     }
 
     private bool CheckGameOver()
@@ -143,6 +171,7 @@ public class GameController : MonoBehaviour
         if (CheckGameOver())
         {
             print("Game over");
+            GameOver();
         }
         else
         {
