@@ -44,23 +44,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11156}
+      Script: {instanceID: 11158}
     - Class: 114
-      Script: {instanceID: 11316}
+      Script: {instanceID: 11318}
     - Class: 114
-      Script: {instanceID: 11356}
+      Script: {instanceID: 11358}
     - Class: 114
-      Script: {instanceID: 11738}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 12122}
+      Script: {instanceID: 12124}
     - Class: 114
-      Script: {instanceID: 12598}
+      Script: {instanceID: 12536}
     - Class: 114
-      Script: {instanceID: 12946}
+      Script: {instanceID: 12582}
     - Class: 114
-      Script: {instanceID: 15576}
+      Script: {instanceID: 12604}
     - Class: 114
-      Script: {instanceID: 15582}
+      Script: {instanceID: 12952}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -368,10 +368,22 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
+      Hash: ec1c1f2c8ddd8f6930ec642b80847d9d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ButtonController
+  - hash:
+      serializedVersion: 2
       Hash: 6939772cb3ce775a8e8d99f332534491
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: efa5c0c43d76b181df02b090b4b88b9c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameController
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
@@ -498,18 +510,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: c29d30950144cd891c6102561d1f974f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameController
-  - hash:
-      serializedVersion: 2
-      Hash: ec1c1f2c8ddd8f6930ec642b80847d9d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ButtonController
   platform: 13
   scenePathNames:
   - Assets/Scenes/Game.unity
