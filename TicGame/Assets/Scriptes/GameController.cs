@@ -84,14 +84,6 @@ public class GameController : MonoBehaviour
 
     private bool CheckGameOver()
     {
-        //Game draw condition
-        if (buttonCount == (interactionButtons.Length - 1))
-        {
-            print("Game Draw");
-            buttonText = "Draw";
-            return true;
-        }
-
         //Row_1 win condition
         if(interactionButtons[0].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[1].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[2].transform.GetChild(0).GetComponent<Text>().text == buttonText)
         {
@@ -138,6 +130,13 @@ public class GameController : MonoBehaviour
         if (interactionButtons[2].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[4].transform.GetChild(0).GetComponent<Text>().text == buttonText && interactionButtons[6].transform.GetChild(0).GetComponent<Text>().text == buttonText)
         {
             print("diagonal_2");
+            return true;
+        }
+        //Game draw condition
+        if (buttonCount == (interactionButtons.Length - 1))
+        {
+            print("Game Draw");
+            buttonText = "Draw";
             return true;
         }
 
