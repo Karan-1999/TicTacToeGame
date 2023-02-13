@@ -17,8 +17,8 @@ public class GameController : MonoBehaviour
     //private
     private bool isCross = false;
     private string buttonText = "O";
-    private int count = 0;
-    private GameObject lastButtonRef = null;
+    private int buttonCount = 0;
+    private List<GameObject> lastButtonRef = new List<GameObject>();
    
     void Start()
     {
@@ -29,9 +29,10 @@ public class GameController : MonoBehaviour
     #region PrivateMethods
     private void SetupGame()
     {
-        count = 0;
+        buttonCount = 0;
         isCross = false;
         buttonText = "O";
+        lastButtonRef.Clear();
 
         foreach (GameObject button in interactionButtons)
         {
@@ -84,7 +85,7 @@ public class GameController : MonoBehaviour
     private bool CheckGameOver()
     {
         //Game draw condition
-        if (count == (interactionButtons.Length - 1))
+        if (buttonCount == (interactionButtons.Length - 1))
         {
             print("Game Draw");
             buttonText = "Draw";
@@ -171,8 +172,11 @@ public class GameController : MonoBehaviour
 
     public void ChangeTurn(GameObject _button)
     {
-        undo.interactable = true;
-        lastButtonRef = _button;
+        lastButtonRef.Add(_button);
+
+        if(lastButtonRef.Count > 0){
+            undo.interactable = true;
+        }
 
         //Check if game is over
         if (CheckGameOver())
@@ -182,7 +186,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            count++;
+            buttonCount++;
             isCross = !isCross;
             if (isCross)
                 buttonText = "X";
@@ -195,12 +199,12 @@ public class GameController : MonoBehaviour
 
     public void UndoClicked()
     {
-        if (lastButtonRef == null) { return; }
-
-        undo.interactable = false;
-        count--;
-        lastButtonRef.GetComponent<ButtonController>().Initialize();
-        lastButtonRef.GetComponent<Button>().interactable = true;
+        undo.interactable = true;
+        buttonCount--;
+        var _btn = lastButtonRef[lastButtonRef.Count - 1];
+        _btn.GetComponent<ButtonController>().Initialize();
+        _btn.GetComponent<Button>().interactable = true;
+        lastButtonRef.Remove(_btn);
 
         isCross = !isCross;
         if (isCross)
@@ -209,6 +213,9 @@ public class GameController : MonoBehaviour
             buttonText = "O";
 
         SetTurnIndicator();
+
+        if (lastButtonRef.Count <= 0)
+            undo.interactable = false;
     }
 
     public string GetButtonText()
